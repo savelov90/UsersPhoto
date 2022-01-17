@@ -32,7 +32,7 @@ class MainFragment : ListFragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
+        viewModel = ViewModelProvider(this)[MainViewModel::class.java]
 
         val adapter: ListAdapter = ArrayAdapter<Any?>(
             requireActivity(),
@@ -46,6 +46,6 @@ class MainFragment : ListFragment() {
 
     override fun onListItemClick(l: ListView, v: View, position: Int, id: Long) {
         super.onListItemClick(l, v, position, id)
-        Toast.makeText(requireActivity(), "Вы выбрали позицию: " + position, Toast.LENGTH_SHORT).show()
+        Toast.makeText(requireActivity(), "Вы выбрали позицию: $position", Toast.LENGTH_SHORT).show()
     }
 }

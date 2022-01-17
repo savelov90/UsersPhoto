@@ -9,8 +9,8 @@ import javax.net.ssl.HttpsURLConnection
 
 class Interactor() {
 
-    val url = URL(ApiConstants.USERS_URL)
-    val connection = url.openConnection() as HttpsURLConnection
+    private val url = URL(ApiConstants.USERS_URL)
+    private val connection = url.openConnection() as HttpsURLConnection
 
     fun getUsersFromApi() {
 
