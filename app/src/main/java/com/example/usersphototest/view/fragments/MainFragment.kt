@@ -6,10 +6,17 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.ListFragment
 import com.example.usersphototest.R
 import com.example.usersphototest.viewmodel.MainViewModel
+import android.widget.ArrayAdapter
+import android.widget.ListAdapter
+import android.widget.ListView
+import android.widget.Toast
+import com.example.usersphototest.utils.Interactor
 
-class MainFragment : Fragment() {
+
+class MainFragment : ListFragment() {
 
     companion object {
         fun newInstance() = MainFragment()
@@ -17,17 +24,28 @@ class MainFragment : Fragment() {
 
     private lateinit var viewModel: MainViewModel
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        return inflater.inflate(R.layout.main_fragment, container, false)
-    }
+    val catNames = arrayOf(
+        "Рыжик", "Барсик", "Мурзик",
+        "Мурка", "Васька", "Томасина", "Кристина", "Пушок", "Дымка",
+        "Кузя", "Китти", "Масяня", "Симба"
+    )
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
         viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
-        // TODO: Use the ViewModel
+
+        val adapter: ListAdapter = ArrayAdapter<Any?>(
+            requireActivity(),
+            android.R.layout.simple_list_item_1, catNames
+        )
+        listAdapter = adapter
+
+        val Int = Interactor()
+        Int.getUsersFromApi()
     }
 
+    override fun onListItemClick(l: ListView, v: View, position: Int, id: Long) {
+        super.onListItemClick(l, v, position, id)
+        Toast.makeText(requireActivity(), "Вы выбрали позицию: " + position, Toast.LENGTH_SHORT).show()
+    }
 }
