@@ -13,6 +13,8 @@ import android.widget.ArrayAdapter
 import android.widget.ListAdapter
 import android.widget.ListView
 import android.widget.Toast
+import androidx.lifecycle.Observer
+import com.example.usersphototest.data.userDTO.User
 import com.example.usersphototest.utils.Interactor
 
 
@@ -24,28 +26,38 @@ class MainFragment : ListFragment() {
 
     private lateinit var viewModel: MainViewModel
 
-    val catNames = arrayOf(
-        "Рыжик", "Барсик", "Мурзик",
-        "Мурка", "Васька", "Томасина", "Кристина", "Пушок", "Дымка",
-        "Кузя", "Китти", "Масяня", "Симба"
-    )
+    private var usersBase = listOf<String>()
+        //Используем backing field
+        set(value) {
+            //Если придет такое же значение то мы выходим из метода
+            if (field == value) return
+            //Если прило другое значение, то кладем его в переменную
+            field = value
+            val adapter: ListAdapter = ArrayAdapter<Any?>(
+                requireActivity(),
+                android.R.layout.simple_list_item_1, field
+            )
+            listAdapter = adapter
+        }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewModel = ViewModelProvider(this)[MainViewModel::class.java]
 
-        val adapter: ListAdapter = ArrayAdapter<Any?>(
-            requireActivity(),
-            android.R.layout.simple_list_item_1, catNames
-        )
-        listAdapter = adapter
+    }
 
-        val Int = Interactor()
-        Int.getUsersFromApi()
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        viewModel.usersListLiveData.observe(viewLifecycleOwner, {
+            usersBase = it
+        })
+
     }
 
     override fun onListItemClick(l: ListView, v: View, position: Int, id: Long) {
         super.onListItemClick(l, v, position, id)
-        Toast.makeText(requireActivity(), "Вы выбрали позицию: $position", Toast.LENGTH_SHORT).show()
+        Toast.makeText(requireActivity(), "Вы выбрали позицию: $position", Toast.LENGTH_SHORT)
+            .show()
     }
 }
