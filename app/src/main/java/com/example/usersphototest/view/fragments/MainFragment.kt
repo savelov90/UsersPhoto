@@ -16,6 +16,7 @@ import android.widget.Toast
 import androidx.lifecycle.Observer
 import com.example.usersphototest.data.userDTO.User
 import com.example.usersphototest.utils.Interactor
+import com.example.usersphototest.view.MainActivity
 
 
 class MainFragment : ListFragment() {
@@ -57,7 +58,9 @@ class MainFragment : ListFragment() {
 
     override fun onListItemClick(l: ListView, v: View, position: Int, id: Long) {
         super.onListItemClick(l, v, position, id)
-        Toast.makeText(requireActivity(), "Вы выбрали позицию: $position", Toast.LENGTH_SHORT)
+        var id = position + 1
+        (requireActivity() as MainActivity).launchPhotosFragment(id.toString())
+        Toast.makeText(requireActivity(), "Вы выбрали позицию: $id", Toast.LENGTH_SHORT)
             .show()
     }
 }

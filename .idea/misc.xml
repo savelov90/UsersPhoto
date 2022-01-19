@@ -3,6 +3,10 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Eugene/AndroidStudioProjects/UsersPhotoTest/app/src/main/res/layout/main_activity.xml" value="0.4048913043478261" />
+        <entry key="..\:/Users/Eugene/AndroidStudioProjects/UsersPhotoTest/app/src/main/res/layout/photos_fragment.xml" value="0.4048913043478261" />
+        <entry key="..\:/Users/Eugene/AndroidStudioProjects/UsersPhotoTest/app/src/main/res/layout/user.xml" value="0.4048913043478261" />
+        <entry key="..\:/Users/Eugene/AppData/Local/Android/Sdk/platforms/android-31/data/res/layout/simple_gallery_item.xml" value="0.4048913043478261" />
         <entry key="..\:/Users/evsav/AndroidStudioProjects/UsersPhotoTest/app/src/main/res/layout/main_activity.xml" value="0.17300724637681159" />
         <entry key="..\:/Users/evsav/AndroidStudioProjects/UsersPhotoTest/app/src/main/res/layout/main_fragment.xml" value="0.264" />
         <entry key="..\:/Users/evsav/AndroidStudioProjects/UsersPhotoTest/app/src/main/res/layout/user.xml" value="0.17300724637681159" />
