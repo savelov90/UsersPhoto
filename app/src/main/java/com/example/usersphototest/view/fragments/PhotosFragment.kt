@@ -11,7 +11,7 @@ import com.example.usersphototest.R
 import com.example.usersphototest.viewmodel.MainViewModel
 import com.example.usersphototest.viewmodel.PhotosViewModel
 
-class PhotosFragment : ListFragment() {
+class PhotosFragment : Fragment() {
 
     companion object {
         fun newInstance() = PhotosFragment()
