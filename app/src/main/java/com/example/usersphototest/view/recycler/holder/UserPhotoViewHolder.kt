@@ -2,6 +2,7 @@ package com.example.usersphototest.view.recycler.holder
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
+import com.example.usersphototest.R
 import com.example.usersphototest.data.userDTO.Photo
 import com.example.usersphototest.databinding.UserPhotoBinding
 
@@ -14,9 +15,10 @@ class UserPhotoViewHolder (itemView: View) : RecyclerView.ViewHolder(itemView) {
 
 
     //В этом методе кладем данные из String в наши view
-    fun bind(photo: Photo) {
+    fun bind(ph: String) {
         //Устанавливаем заголовок
-        title.text = photo.title
+        title.text = ph
+        photo.setImageResource(R.drawable.ic_launcher_foreground)
     }
 
 }

@@ -2,21 +2,17 @@ package com.example.usersphototest.view.fragments
 
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.fragment.app.ListFragment
-import com.example.usersphototest.R
-import com.example.usersphototest.viewmodel.MainViewModel
+import com.example.usersphototest.view.viewmodel.MainFragmentViewModel
 import android.widget.ArrayAdapter
 import android.widget.ListAdapter
 import android.widget.ListView
 import android.widget.Toast
-import androidx.lifecycle.Observer
+import androidx.lifecycle.map
 import com.example.usersphototest.data.userDTO.User
-import com.example.usersphototest.utils.Interactor
-import com.example.usersphototest.view.MainActivity
+import com.example.usersphototest.view.activity.MainActivity
+import com.example.usersphototest.view.viewmodel.MainFragmentViewModelContract
 
 
 class MainFragment : ListFragment() {
@@ -25,7 +21,7 @@ class MainFragment : ListFragment() {
         fun newInstance() = MainFragment()
     }
 
-    private lateinit var viewModel: MainViewModel
+    private lateinit var viewModel: MainFragmentViewModelContract
 
     private var usersBase = listOf<String>()
         //Используем backing field
@@ -43,24 +39,28 @@ class MainFragment : ListFragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel = ViewModelProvider(this)[MainViewModel::class.java]
-
+        viewModel = ViewModelProvider(this)[MainFragmentViewModel::class.java]
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel.usersListLiveData.observe(viewLifecycleOwner, {
+        viewModel.usersListLiveData.map { list ->
+            val usersName = mutableListOf<String>()
+            list.forEach {
+                usersName.add(it.name)
+            }
+            usersName
+        }.observe(viewLifecycleOwner) {
             usersBase = it
-        })
-
+        }
     }
 
     override fun onListItemClick(l: ListView, v: View, position: Int, id: Long) {
         super.onListItemClick(l, v, position, id)
-        var id = position + 1
-        (requireActivity() as MainActivity).launchPhotosFragment(id.toString())
-        Toast.makeText(requireActivity(), "Вы выбрали позицию: $id", Toast.LENGTH_SHORT)
+        val userId = position + 1
+        (requireActivity() as MainActivity).launchPhotosFragment(userId.toString())
+        Toast.makeText(requireActivity(), "Вы выбрали позицию: $userId", Toast.LENGTH_SHORT)
             .show()
     }
 }

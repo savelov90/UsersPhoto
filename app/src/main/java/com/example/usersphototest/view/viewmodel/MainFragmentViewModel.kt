@@ -1,4 +1,4 @@
-package com.example.usersphototest.viewmodel
+package com.example.usersphototest.view.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -6,9 +6,9 @@ import com.example.usersphototest.App
 import com.example.usersphototest.data.userDTO.User
 import java.util.concurrent.Executors
 
-class MainViewModel : ViewModel() {
+class MainFragmentViewModel : ViewModel(), MainFragmentViewModelContract {
 
-    val usersListLiveData = MutableLiveData<List<String>>()
+    override val usersListLiveData = MutableLiveData<List<User>>()
 
     init {
         Executors.newSingleThreadExecutor().execute {

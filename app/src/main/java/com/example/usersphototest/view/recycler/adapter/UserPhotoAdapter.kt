@@ -9,7 +9,7 @@ import com.example.usersphototest.view.recycler.holder.UserPhotoViewHolder
 
 class UserPhotoAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     //Здесь у нас хранится список элементов для RV
-    val items = mutableListOf<Photo>()
+    val items = mutableListOf<String>()
 
     //Этот метод нужно переопределить на возврат количества элементов в списке RV
     override fun getItemCount() = items.size
@@ -33,7 +33,7 @@ class UserPhotoAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     }
 
     //Метод для добавления объектов в наш список
-    fun addItems(list: List<Photo>) {
+    fun addItems(list: List<String>) {
         //Сначала очищаем(если не реализовать DiffUtils)
         items.clear()
         //Добавляем

@@ -1,4 +1,4 @@
-package com.example.usersphototest.view
+package com.example.usersphototest.view.activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
