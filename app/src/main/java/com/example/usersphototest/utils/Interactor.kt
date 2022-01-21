@@ -15,8 +15,6 @@ class Interactor {
     private val url = URL(ApiConstants.USERS_URL)
     private val connection = url.openConnection() as HttpsURLConnection
 
-    private val photosUrl = URL(ApiConstants.PHOTOS_URL)
-
     fun getUsersFromApi(): List<User> {
         BufferedReader(InputStreamReader(connection.inputStream)).use {
             val lines = it.readLines().joinToString("")
