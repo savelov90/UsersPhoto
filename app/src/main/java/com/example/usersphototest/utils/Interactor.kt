@@ -1,5 +1,6 @@
 package com.example.usersphototest.utils
 
+import android.graphics.Bitmap
 import com.example.usersphototest.data.ApiConstants
 import com.example.usersphototest.data.userDTO.Photo
 import com.example.usersphototest.data.userDTO.User
@@ -37,5 +38,4 @@ class Interactor {
             return photos
         }
     }
-
 }
