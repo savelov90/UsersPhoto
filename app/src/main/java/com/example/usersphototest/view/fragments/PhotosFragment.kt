@@ -10,6 +10,7 @@ import android.widget.ArrayAdapter
 import android.widget.ListAdapter
 import androidx.lifecycle.map
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.usersphototest.data.userDTO.Photo
 import com.example.usersphototest.databinding.PhotosFragmentBinding
 import com.example.usersphototest.view.recycler.adapter.UserPhotoAdapter
 import com.example.usersphototest.view.viewmodel.PhotosFragmentViewModel
@@ -26,7 +27,7 @@ class PhotosFragment : Fragment() {
 
     private lateinit var viewModel: PhotosFragmentViewModel
 
-    private var photosBase = listOf<String>()
+    private var photosBase = listOf<Photo>()
         //Используем backing field
         set(value) {
             //Если придет такое же значение то мы выходим из метода
@@ -56,13 +57,8 @@ class PhotosFragment : Fragment() {
         initRecyckler()
 
         viewModel.getPhotosFromApi(userId)
-        viewModel.photosListLiveData.map { list ->
-            val photosTitle = mutableListOf<String>()
-            list.forEach {
-                photosTitle.add(it.title)
-            }
-            photosTitle
-        }.observe(viewLifecycleOwner) {
+        viewModel.photosListLiveData
+            .observe(viewLifecycleOwner) {
             photosBase = it
             photoAdapter.addItems(it)
         }

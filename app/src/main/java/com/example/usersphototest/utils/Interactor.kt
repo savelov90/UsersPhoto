@@ -1,6 +1,5 @@
 package com.example.usersphototest.utils
 
-import android.graphics.Bitmap
 import com.example.usersphototest.data.ApiConstants
 import com.example.usersphototest.data.userDTO.Photo
 import com.example.usersphototest.data.userDTO.User
@@ -27,15 +26,12 @@ class Interactor {
 
     fun getPhotosFromApi(id: String): List<Photo> {
 
-        println(ApiConstants.PHOTOS_URL + id)
         val photosUrl = URL(ApiConstants.PHOTOS_URL + id)
         val photoConnection = photosUrl.openConnection() as HttpsURLConnection
 
         BufferedReader(InputStreamReader(photoConnection.inputStream)).use {
             val lines = it.readLines().joinToString("")
-            val photos = gson.fromJson(lines, Array<Photo>::class.java).toList()
-            println(photos)
-            return photos
+            return gson.fromJson(lines, Array<Photo>::class.java).toList()
         }
     }
 }

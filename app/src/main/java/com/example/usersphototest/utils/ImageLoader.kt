@@ -16,6 +16,7 @@ object ImageLoader {
         Executors.newSingleThreadExecutor().execute {
             val url = URL(src)
             (url.openConnection() as HttpURLConnection).apply {
+                setRequestProperty("User-Agent", "")
                 doInput = true
                 connect()
                 inputStream.use {
