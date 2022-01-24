@@ -1,4 +1,4 @@
-package com.example.usersphototest.utils
+package com.example.usersphototest.interactor
 
 import com.example.usersphototest.data.ApiConstants
 import com.example.usersphototest.data.userDTO.Photo
@@ -9,13 +9,12 @@ import java.io.InputStreamReader
 import java.net.URL
 import javax.net.ssl.HttpsURLConnection
 
+
 class Interactor {
 
     val gson = Gson()
     private val url = URL(ApiConstants.USERS_URL)
     private val connection = url.openConnection() as HttpsURLConnection
-
-    private val photosUrl = URL(ApiConstants.PHOTOS_URL)
 
     fun getUsersFromApi(): List<User> {
         BufferedReader(InputStreamReader(connection.inputStream)).use {

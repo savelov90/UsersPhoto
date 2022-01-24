@@ -60,7 +60,5 @@ class MainFragment : ListFragment() {
         super.onListItemClick(l, v, position, id)
         val userId = position + 1
         (requireActivity() as MainActivity).launchPhotosFragment(userId.toString())
-        Toast.makeText(requireActivity(), "Вы выбрали позицию: $userId", Toast.LENGTH_SHORT)
-            .show()
     }
 }

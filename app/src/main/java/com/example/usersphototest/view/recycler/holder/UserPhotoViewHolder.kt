@@ -1,6 +1,7 @@
 package com.example.usersphototest.view.recycler.holder
 
 import android.view.View
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.example.usersphototest.R
 import com.example.usersphototest.data.userDTO.Photo
@@ -14,6 +15,7 @@ class UserPhotoViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     //Привязываем view из layout к переменным
     var title = userPhotoBinding.title
     var picture = userPhotoBinding.picture
+    var progress = userPhotoBinding.progressBar
 
 
     //В этом методе кладем данные из String в наши view
@@ -23,10 +25,10 @@ class UserPhotoViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         picture.setImageResource(R.drawable.white)
         val url = photo.url
 
-        //прогресс бар
+        progress.isVisible = true
         ImageLoader.getBitmapFromURL(url) { bitmap ->
-            bitmap?.let { picture.setImageBitmap(it) }
-
+            bitmap?.let { picture.setImageBitmap(it)
+                progress.isVisible = false}
         }
     }
 }
