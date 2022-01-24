@@ -1,7 +1,7 @@
 package com.example.usersphototest
 
 import android.app.Application
-import com.example.usersphototest.utils.Interactor
+import com.example.usersphototest.interactor.Interactor
 
 class App : Application() {
 

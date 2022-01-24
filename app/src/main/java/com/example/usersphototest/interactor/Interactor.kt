@@ -1,4 +1,4 @@
-package com.example.usersphototest.utils
+package com.example.usersphototest.interactor
 
 import com.example.usersphototest.data.ApiConstants
 import com.example.usersphototest.data.userDTO.Photo
@@ -8,6 +8,7 @@ import java.io.BufferedReader
 import java.io.InputStreamReader
 import java.net.URL
 import javax.net.ssl.HttpsURLConnection
+
 
 class Interactor {
 
@@ -24,16 +25,12 @@ class Interactor {
 
     fun getPhotosFromApi(id: String): List<Photo> {
 
-        println(ApiConstants.PHOTOS_URL + id)
         val photosUrl = URL(ApiConstants.PHOTOS_URL + id)
         val photoConnection = photosUrl.openConnection() as HttpsURLConnection
 
         BufferedReader(InputStreamReader(photoConnection.inputStream)).use {
             val lines = it.readLines().joinToString("")
-            val photos = gson.fromJson(lines, Array<Photo>::class.java).toList()
-            println(photos)
-            return photos
+            return gson.fromJson(lines, Array<Photo>::class.java).toList()
         }
     }
-
 }
