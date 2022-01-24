@@ -11,7 +11,6 @@ import javax.net.ssl.HttpsURLConnection
 
 
 class Interactor {
-
     val gson = Gson()
     private val url = URL(ApiConstants.USERS_URL)
     private val connection = url.openConnection() as HttpsURLConnection
@@ -24,10 +23,8 @@ class Interactor {
     }
 
     fun getPhotosFromApi(id: String): List<Photo> {
-
         val photosUrl = URL(ApiConstants.PHOTOS_URL + id)
         val photoConnection = photosUrl.openConnection() as HttpsURLConnection
-
         BufferedReader(InputStreamReader(photoConnection.inputStream)).use {
             val lines = it.readLines().joinToString("")
             return gson.fromJson(lines, Array<Photo>::class.java).toList()

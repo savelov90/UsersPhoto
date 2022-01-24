@@ -16,19 +16,14 @@ import com.example.usersphototest.view.viewmodel.MainFragmentViewModelContract
 
 
 class MainFragment : ListFragment() {
-
-    companion object {
-        fun newInstance() = MainFragment()
-    }
-
     private lateinit var viewModel: MainFragmentViewModelContract
 
     private var usersBase = listOf<String>()
-        //Используем backing field
+        //backing field
         set(value) {
-            //Если придет такое же значение то мы выходим из метода
+            //Если придет такое же значение выход из метода
             if (field == value) return
-            //Если прило другое значение, то кладем его в переменную
+            //Если пришло другое значение, то присваиваем переменной
             field = value
             val adapter: ListAdapter = ArrayAdapter<Any?>(
                 requireActivity(),
@@ -44,16 +39,16 @@ class MainFragment : ListFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        viewModel.usersListLiveData.map { list ->
-            val usersName = mutableListOf<String>()
-            list.forEach {
-                usersName.add(it.name)
+        viewModel.usersListLiveData
+            .map { list ->
+                val usersName = mutableListOf<String>()
+                list.forEach {
+                    usersName.add(it.name)
+                }
+                usersName
+            }.observe(viewLifecycleOwner) {
+                usersBase = it
             }
-            usersName
-        }.observe(viewLifecycleOwner) {
-            usersBase = it
-        }
     }
 
     override fun onListItemClick(l: ListView, v: View, position: Int, id: Long) {

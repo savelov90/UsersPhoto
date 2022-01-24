@@ -7,7 +7,6 @@ import com.example.usersphototest.data.userDTO.User
 import java.util.concurrent.Executors
 
 class MainFragmentViewModel : ViewModel(), MainFragmentViewModelContract {
-
     override val usersListLiveData = MutableLiveData<List<User>>()
 
     init {

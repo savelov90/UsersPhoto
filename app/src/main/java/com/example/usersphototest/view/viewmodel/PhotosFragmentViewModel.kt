@@ -7,7 +7,6 @@ import com.example.usersphototest.data.userDTO.Photo
 import java.util.concurrent.Executors
 
 class PhotosFragmentViewModel : ViewModel(), PhotosFragmentViewModelContract {
-
     override val photosListLiveData = MutableLiveData<List<Photo>>()
 
     fun getPhotosFromApi(id: String) {

@@ -16,23 +16,14 @@ import com.example.usersphototest.view.recycler.adapter.UserPhotoAdapter
 import com.example.usersphototest.view.viewmodel.PhotosFragmentViewModel
 
 class PhotosFragment : Fragment() {
-
     private lateinit var binding: PhotosFragmentBinding
     private lateinit var photoAdapter: UserPhotoAdapter
     private lateinit var userId: String
-
-    companion object {
-        fun newInstance() = PhotosFragment()
-    }
-
     private lateinit var viewModel: PhotosFragmentViewModel
 
     private var photosBase = listOf<Photo>()
-        //Используем backing field
         set(value) {
-            //Если придет такое же значение то мы выходим из метода
             if (field == value) return
-            //Если прило другое значение, то кладем его в переменную
             field = value
             photoAdapter.addItems(field)
         }
@@ -52,26 +43,20 @@ class PhotosFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         userId = arguments?.getString("id", "1").toString()
         initRecyckler()
-
         viewModel.getPhotosFromApi(userId)
         viewModel.photosListLiveData
             .observe(viewLifecycleOwner) {
-            photosBase = it
-            photoAdapter.addItems(it)
-        }
+                photosBase = it
+                photoAdapter.addItems(it)
+            }
     }
 
     private fun initRecyckler() {
-        //находим наш RV
         binding.mainRecycler.apply {
-            //Инициализируем наш адаптер
             photoAdapter = UserPhotoAdapter()
-            //Присваиваем адаптер
             adapter = photoAdapter
-            //Присвоим layoutmanager
             layoutManager = LinearLayoutManager(requireContext())
         }
     }

@@ -3,6 +3,8 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Eugene/AndroidStudioProjects/UsersPhoto/app/src/main/res/layout/main_activity.xml" value="0.276268115942029" />
+        <entry key="..\:/Users/Eugene/AndroidStudioProjects/UsersPhoto/app/src/main/res/layout/photos_fragment.xml" value="0.276268115942029" />
         <entry key="..\:/Users/Eugene/AndroidStudioProjects/UsersPhoto/app/src/main/res/layout/user_photo.xml" value="0.2609375" />
         <entry key="..\:/Users/evsav/Downloads/UsersPhotoTest/UsersPhotoTest/app/src/main/res/layout/photos_fragment.xml" value="0.13020833333333334" />
       </map>
