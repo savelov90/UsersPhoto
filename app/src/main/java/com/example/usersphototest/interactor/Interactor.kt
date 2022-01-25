@@ -9,15 +9,17 @@ import java.io.InputStreamReader
 import java.net.URL
 import javax.net.ssl.HttpsURLConnection
 
+private const val SEPARATOR = ""
 
 class Interactor {
     val gson = Gson()
     private val url = URL(ApiConstants.USERS_URL)
     private val connection = url.openConnection() as HttpsURLConnection
 
+
     fun getUsersFromApi(): List<User> {
         BufferedReader(InputStreamReader(connection.inputStream)).use {
-            val lines = it.readLines().joinToString("")
+            val lines = it.readLines().joinToString(SEPARATOR)
             return gson.fromJson(lines, Array<User>::class.java).toList()
         }
     }
@@ -26,7 +28,7 @@ class Interactor {
         val photosUrl = URL(ApiConstants.PHOTOS_URL + id)
         val photoConnection = photosUrl.openConnection() as HttpsURLConnection
         BufferedReader(InputStreamReader(photoConnection.inputStream)).use {
-            val lines = it.readLines().joinToString("")
+            val lines = it.readLines().joinToString(SEPARATOR)
             return gson.fromJson(lines, Array<Photo>::class.java).toList()
         }
     }
