@@ -27,8 +27,10 @@ class UserPhotoViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         progress.isVisible = true
         ImageLoader.getBitmapFromURL(url) { bitmap ->
-            bitmap?.let { picture.setImageBitmap(it)
-                progress.isVisible = false}
+            bitmap?.let {
+                picture.setImageBitmap(it)
+                progress.isVisible = false
+            }
         }
     }
 }

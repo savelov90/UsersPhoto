@@ -1,0 +1,5 @@
+<resources>
+    <dimen name="translation_dp">10dp</dimen>
+    <dimen name="progress_dp">100dp</dimen>
+    <dimen name="height_sp">355sp</dimen>
+</resources>

@@ -1,0 +1,59 @@
+Index: app/src/main/java/com/example/usersphototest/view/recycler/holder/UserPhotoViewHolder.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.usersphototest.view.recycler.holder\r\n\r\nimport android.view.View\r\nimport androidx.recyclerview.widget.RecyclerView\r\nimport com.example.usersphototest.R\r\nimport com.example.usersphototest.data.userDTO.Photo\r\nimport com.example.usersphototest.databinding.UserPhotoBinding\r\n\r\nclass UserPhotoViewHolder (itemView: View) : RecyclerView.ViewHolder(itemView) {\r\n\r\n    var userPhotoBinding = UserPhotoBinding.bind(itemView)\r\n    //Привязываем view из layout к переменным\r\n    var title = userPhotoBinding.title\r\n    var photo = userPhotoBinding.picture\r\n\r\n\r\n    //В этом методе кладем данные из String в наши view\r\n    fun bind(ph: String) {\r\n        //Устанавливаем заголовок\r\n        title.text = ph\r\n        photo.setImageResource(R.drawable.ic_launcher_foreground)\r\n    }\r\n\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/usersphototest/view/recycler/holder/UserPhotoViewHolder.kt b/app/src/main/java/com/example/usersphototest/view/recycler/holder/UserPhotoViewHolder.kt
+--- a/app/src/main/java/com/example/usersphototest/view/recycler/holder/UserPhotoViewHolder.kt	(revision d62aeb8f98e285ac664a310fd60ad60531a9e0e3)
++++ b/app/src/main/java/com/example/usersphototest/view/recycler/holder/UserPhotoViewHolder.kt	(date 1642764576777)
+@@ -2,6 +2,7 @@
+ 
+ import android.view.View
+ import androidx.recyclerview.widget.RecyclerView
++import com.example.usersphototest.App
+ import com.example.usersphototest.R
+ import com.example.usersphototest.data.userDTO.Photo
+ import com.example.usersphototest.databinding.UserPhotoBinding
+@@ -19,6 +20,7 @@
+         //Устанавливаем заголовок
+         title.text = ph
+         photo.setImageResource(R.drawable.ic_launcher_foreground)
++
+     }
+ 
+ }
+\ No newline at end of file
+Index: app/src/main/java/com/example/usersphototest/utils/Interactor.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.usersphototest.utils\r\n\r\nimport com.example.usersphototest.data.ApiConstants\r\nimport com.example.usersphototest.data.userDTO.Photo\r\nimport com.example.usersphototest.data.userDTO.User\r\nimport com.google.gson.Gson\r\nimport java.io.BufferedReader\r\nimport java.io.InputStreamReader\r\nimport java.net.URL\r\nimport javax.net.ssl.HttpsURLConnection\r\n\r\nclass Interactor {\r\n\r\n    val gson = Gson()\r\n    private val url = URL(ApiConstants.USERS_URL)\r\n    private val connection = url.openConnection() as HttpsURLConnection\r\n\r\n    private val photosUrl = URL(ApiConstants.PHOTOS_URL)\r\n\r\n    fun getUsersFromApi(): List<User> {\r\n        BufferedReader(InputStreamReader(connection.inputStream)).use {\r\n            val lines = it.readLines().joinToString(\"\")\r\n            return gson.fromJson(lines, Array<User>::class.java).toList()\r\n        }\r\n    }\r\n\r\n    fun getPhotosFromApi(id: String): List<Photo> {\r\n\r\n        println(ApiConstants.PHOTOS_URL + id)\r\n        val photosUrl = URL(ApiConstants.PHOTOS_URL + id)\r\n        val photoConnection = photosUrl.openConnection() as HttpsURLConnection\r\n\r\n        BufferedReader(InputStreamReader(photoConnection.inputStream)).use {\r\n            val lines = it.readLines().joinToString(\"\")\r\n            val photos = gson.fromJson(lines, Array<Photo>::class.java).toList()\r\n            println(photos)\r\n            return photos\r\n        }\r\n    }\r\n\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/usersphototest/utils/Interactor.kt b/app/src/main/java/com/example/usersphototest/utils/Interactor.kt
+--- a/app/src/main/java/com/example/usersphototest/utils/Interactor.kt	(revision d62aeb8f98e285ac664a310fd60ad60531a9e0e3)
++++ b/app/src/main/java/com/example/usersphototest/utils/Interactor.kt	(date 1642765032258)
+@@ -8,6 +8,12 @@
+ import java.io.InputStreamReader
+ import java.net.URL
+ import javax.net.ssl.HttpsURLConnection
++import android.graphics.Bitmap
++import java.net.ResponseCache
++import java.net.URLConnection
++import android.graphics.BitmapFactory
++import java.io.InputStream
++
+ 
+ class Interactor {
+ 
+@@ -15,8 +21,6 @@
+     private val url = URL(ApiConstants.USERS_URL)
+     private val connection = url.openConnection() as HttpsURLConnection
+ 
+-    private val photosUrl = URL(ApiConstants.PHOTOS_URL)
+-
+     fun getUsersFromApi(): List<User> {
+         BufferedReader(InputStreamReader(connection.inputStream)).use {
+             val lines = it.readLines().joinToString("")
